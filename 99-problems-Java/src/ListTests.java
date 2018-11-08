@@ -5,6 +5,9 @@ import org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
+import java.util.Arrays;
+
+
 public class ListTests {
 	
 	//CHALLENGE 1: tests the findLastElement() method from ListChallenges.java
@@ -96,6 +99,44 @@ public class ListTests {
 		
 		for(int i = 0; i < 4; i ++) {
 			assertThat(noDup.get(i), is(equalTo(i)));
+		}
+	}
+	
+	//CHALLENGE 9: test the duplicatesToSublist() method from ListChallenges.java
+	
+	@Test
+	public void testDuplicatesToSubList() throws Exception {
+		LinkedList<String> testing = new LinkedList();
+		
+		testing.add("a"); testing.add("a"); testing.add("a"); testing.add("a");
+		testing.add("b"); 
+		testing.add("c");testing.add("c");
+		testing.add("a");testing.add("a");
+		testing.add("d"); 
+		testing.add("e"); testing.add("e"); testing.add("e"); testing.add("e");
+		
+		LinkedList<LinkedList<String>> resultList = 
+				ListChallenges.duplicatesToSubList(testing);
+	
+		assertThat(resultList.size(), is(equalTo(6)));
+		
+		for(int i = 0; i < 4; i++) {
+			assertThat(resultList.get(0).get(i), is(equalTo("a")));
+		}
+		for(int i = 0; i < 1; i++) {
+			assertThat(resultList.get(1).get(i), is(equalTo("b")));
+		}
+		for(int i = 0; i < 2; i++) {
+			assertThat(resultList.get(2).get(i), is(equalTo("c")));
+		}
+		for(int i = 0; i < 2; i++) {
+			assertThat(resultList.get(3).get(i), is(equalTo("a")));
+		}
+		for(int i = 0; i < 1; i++) {
+			assertThat(resultList.get(4).get(i), is(equalTo("d")));
+		}
+		for(int i = 0; i < 4; i++) {
+			assertThat(resultList.get(5).get(i), is(equalTo("e")));
 		}
 	}
 }
